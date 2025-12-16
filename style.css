@@ -1,0 +1,475 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #ec4899, #fb7185);
+    color: white;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    color: white;
+    border: none;
+}
+
+.btn-primary .icon {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    /* đổi được màu */
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #db2777, #ec4899);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+}
+
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
+}
+
+.btn-success {
+    background: #10b981;
+    color: white;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.btn-success:hover {
+    background: #059669;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.table-container {
+    padding: 30px;
+    overflow-x: auto;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #667eea;
+}
+
+.error {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #dc2626;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    /* 👈 đổi từ collapse */
+    border-spacing: 0;
+    /* 👈 không tạo khe hở */
+}
+
+
+thead th {
+    background: linear-gradient(135deg, #ec4899, #fb7185);
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 600;
+    padding: 16px 12px;
+    /* giờ sẽ thấy rõ */
+}
+
+thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Viền trên & dưới cho tất cả td */
+tbody td {
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Viền trái CHỈ cho cột đầu */
+tbody td:first-child {
+    border-left: 1px solid #e5e7eb;
+}
+
+/* Viền phải CHỈ cho cột cuối */
+tbody td:last-child {
+    border-right: 1px solid #e5e7eb;
+}
+
+/* Viền + bo góc dưới trái */
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+/* Viền + bo góc dưới phải */
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+tbody tr {
+    transition: background-color 0.2s ease, transform 0.15s ease;
+
+}
+
+tbody tr:hover {
+    background-color: #fce7f3;
+    /* cam nhạt */
+}
+
+tbody td {
+    padding: 14px 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    /* Ẩn scrollbar */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE, Edge cũ */
+
+    animation: slideUp 0.3s ease;
+}
+
+/* Chrome, Safari, Edge mới */
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-small {
+    max-width: 400px;
+    padding: 20px 15px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    position: relative;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+}
+
+/* H2 ở chính giữa */
+.modal-header h2 {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    color: #1e293b;
+}
+
+/* Nút X về bên phải */
+.modal-header .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #94a3b8;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #475569;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.user-info {
+    font-weight: 600;
+    color: #667eea;
+    margin-top: 10px;
+}
+
+form {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+.gradient-border {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #ec4899, #fb7185) border-box;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    /* 👈 bỏ border cũ */
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+input.error {
+    border-color: #ef4444;
+}
+
+.error-message {
+    display: block;
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    header h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+}
+
+/* Loading animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.action-buttons .btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-buttons i {
+  font-size: 16px;
+}
