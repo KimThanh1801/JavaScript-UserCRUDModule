@@ -289,43 +289,40 @@ async function updateUserCount() {
 }
 
 
-async function renderUsers() {
-    userTableBody.innerHTML = ""
+async function renderUsers(list = users) {
+    const tbody = document.getElementById("userTableBody");
+    tbody.innerHTML = "";
 
-    users.forEach((user) => {
-        const row = document.createElement("tr")
-        row.innerHTML = `
-          <td>${user.id}</td>
-          <td>${user.name}</td>
-          <td>${user.username}</td>
-          <td>${user.email}</td>
-          <td>${user.phone}</td>
-          <td>${user.website || "-"}</td>
-              <td>
-  <div class="action-buttons">
-    <button
-      class="btn btn-success"
-      onclick="editUser(${user.id})"
-      title="Edit"
-    >
-      <i class="fa-solid fa-pen-to-square"></i>
-    </button>
+    if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;">No users found</td></tr>`;
+        userCount.textContent = `(0 users)`;
+        return;
+    }
 
-    <button
-      class="btn btn-danger"
-      onclick="showDeleteConfirmation(${user.id})"
-      title="Delete"
-    >
-      <i class="fa-solid fa-trash"></i>
-    </button>
-  </div>
-</td>
-        `
-        userTableBody.appendChild(row)
-    })
+    list.forEach(user => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.phone}</td>
+            <td>${user.website || "-"}</td>
+            <td>
+                <div class="action-buttons">
+                    <button class="btn btn-success" onclick="editUser(${user.id})">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="btn btn-danger" onclick="showDeleteConfirmation(${user.id})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
 
-    // ✅ cập nhật tổng user
-    updateUserCount()
+    userCount.textContent = `(${list.length} users)`;
 }
 
 // Show Delete Confirmation
@@ -416,3 +413,17 @@ window.showDeleteConfirmation = showDeleteConfirmation
 document.addEventListener("DOMContentLoaded", () => {
     init()
 })
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase().trim();
+
+    const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(query) ||
+        user.username.toLowerCase().includes(query) ||
+        user.email.toLowerCase().includes(query)
+    );
+
+    renderUsers(filteredUsers);
+});
