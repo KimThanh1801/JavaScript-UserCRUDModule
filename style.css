@@ -555,3 +555,112 @@ section {
 }
 
 /* </CHANGE> */
+/* Table container responsive */
+.table-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow-x: auto; /* cho phép scroll ngang trên màn hình nhỏ */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng đầy đủ width, scroll ngang nếu nhỏ */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 700px; /* đảm bảo các cột không quá nhỏ */
+}
+
+/* Header không wrap chữ */
+thead th {
+    white-space: nowrap;
+}
+
+/* Bảng hover + hiệu ứng */
+tbody tr:hover {
+    background-color: #fce7f3;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+/* Cột hành động responsive */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap; /* cho phép xuống dòng khi quá hẹp */
+}
+
+.action-buttons .btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive cho nhiều màn hình */
+@media (max-width: 1024px) {
+    table {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 12px;
+        min-width: 500px; /* scroll ngang nếu bé hơn */
+    }
+
+    th, td {
+        padding: 10px 8px;
+        text-align: center;
+    }
+
+    .action-buttons {
+        gap: 6px;
+    }
+
+    .action-buttons .btn {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        min-width: 400px;
+    }
+
+    th, td {
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .action-buttons .btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Scrollbar ẩn nhưng vẫn cuộn được */
+.table-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: rgba(236, 72, 153, 0.3);
+    border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: transparent;
+}
